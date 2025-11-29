@@ -44,6 +44,7 @@ public class LoginPageTest extends BaseTestClass {
         loginPage.clickOnCloseButton();
 
     }
+    //1
 
     @Test(priority = 1)
     public void verifyMissingLogin() throws InterruptedException {

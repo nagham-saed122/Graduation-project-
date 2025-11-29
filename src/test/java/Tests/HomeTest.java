@@ -9,10 +9,10 @@ import java.util.List;
 
 public class HomeTest extends BaseTestClass {
 
-        @Test
-        public void verifyNavbarElementsAreDisplayed() {
-            home = homePage.clickHomeButton();
-            Assert.assertTrue(home.isLogoDisplayed(), "Logo should be displayed");
+    @Test
+    public void verifyNavbarElementsAreDisplayed() {
+        home = homePage.clickHomeButton();
+        Assert.assertTrue(home.isLogoDisplayed(), "Logo should be displayed");
         Assert.assertTrue(home.isHomeLinkDisplayed(), "Home link should be displayed");
         Assert.assertTrue(home.isContactDisplayed(), "Contact link should be displayed");
         Assert.assertTrue(home.isAboutUsDisplayed(), "About Us link should be displayed");
@@ -35,7 +35,6 @@ public class HomeTest extends BaseTestClass {
         }
     }
 
-
     @Test
     public void verifyCategoriesAreClickable() {
 
@@ -53,7 +52,6 @@ public class HomeTest extends BaseTestClass {
         WebElement monitors = home.getMonitorsCategory();
         Assert.assertTrue(monitors.isDisplayed(), "Monitors category should be clickable");
     }
-
 
     @Test
     public void verifyHomePageTitle() {
@@ -77,10 +75,4 @@ public class HomeTest extends BaseTestClass {
             Assert.assertTrue(home.getProductPrice(product).isDisplayed(), "Product price must be displayed");
         }
     }
-
-
-
-
 }
-
-

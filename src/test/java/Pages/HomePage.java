@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 
 public class HomePage {
     WebDriver driver;
-
+//
     By SignUpBTNLocator = By.id("signin2");
     By LoginBTNLocator = By.id("login2");
     By HomeBTNLocator = By.className("nav-link");

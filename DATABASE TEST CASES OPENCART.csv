@@ -1,0 +1,107 @@
+test_ID,"test case description",pre-condition,"roles ","test data",steps/actions,"expected results","actual  results
+",status,priority,"created by","type ",,
+DB_1,"Verify user registration creates a customer record in oc_customer","OpenCart installed",Customer,"Customer ID: 1001","1. INSERT INTO oc_customer (customer_id, customer_group_id, firstname, lastname, email, telephone, password, status, date_added) VALUES (1001, 1, 'Doha', 'Ramadan', 'doha.ramadan@test.com', '123456789', 'hashed_password_123', 1, '2024-01-15 10:00:00')
+2. SELECT * FROM oc_customer WHERE customer_id = 1001
+","Customer record created with name Doha Ramadan and email doha.ramadan@test.com.","As Expected",pass,High,"Doha Ramadan",Positive,,
+DB_2,"Verify product creation inserts a product record in oc_product","Admin access",Admin,"Product ID: 1001","1. INSERT INTO oc_product (product_id, model, quantity, price, status, date_added) VALUES (1001, 'PROD-001', 50, 99.99, 1, '2024-01-15 10:00:00');
+2. SELECT * FROM oc_product WHERE product_id = 1001;
+","Product record created with model PROD-001, quantity 50, price 99.99.","As Expected",pass,High,"Doha Ramadan",Positive,,
+DB_3,"Verify order creation inserts an order record in oc_order","Customer and product exist",Customer,"Order ID: 1001","1. INSERT INTO oc_order (order_id, customer_id, firstname, lastname, email, total, order_status_id, date_added) VALUES (1001, 1001, 'Doha', 'Ramadan', 'doha.ramadan@test.com', 199.98, 1, '2024-01-15 11:00:00');
+2. SELECT * FROM oc_order WHERE order_id = 1001;
+","Order record created linked to the customer with total 199.98.","As Expected",pass,High,"Doha Ramadan",Positive,,
+DB_4,"Verify category hierarchy is created in oc_category","Admin access",Admin,"Category IDs: 1001,1002","1. Execute INSERT INTO oc_category (category_id, parent_id, status) VALUES (1001, 0, 1), (1002, 1001, 1);
+2. Execute SELECT * FROM oc_category WHERE category_id IN (1001, 1002);
+","Category hierarchy created with a parent category and its child category.","As Expected",pass,Medium,"Doha Ramadan",Positive,,
+DB_5,"Verify customer login entry is recorded in oc_customer_login","Customer exists",Customer,"Login ID: 1001","1. INSERT INTO oc_customer_login (customer_login_id, email, ip, total, date_added, date_modified) VALUES (1001, 'doha.ramadan@test.com', '192.168.1.100', 1, '2024-01-15 10:05:00', '2024-01-15 10:05:00');
+2. SELECT * FROM oc_customer_login WHERE customer_login_id = 1001;
+","Customer login entry recorded for doha.ramadan@test.com with the provided IP.","As Expected",pass,Medium,"Doha Ramadan",Positive,,
+DB_6,"Verify shopping cart entry is created in oc_cart","Customer and product exist",Customer,"Cart ID: 1001","1. INSERT INTO oc_cart (cart_id, customer_id, product_id, quantity, date_added) VALUES (1001, 1001, 1001, 1, '2024-01-15 10:30:00');
+2. SELECT * FROM oc_cart WHERE cart_id = 1001;
+","Shopping cart entry created for the customer containing the specified product and quantity.","As Expected",pass,High,"Doha Ramadan",Positive,,
+DB_7,"Verify product description is added to oc_product_description for search","Product exists",Customer,"Product ID: 1001","1. INSERT INTO oc_product_description (product_id, language_id, name, description, tag) VALUES (1001, 1, 'Test Product', 'This is a test product description', 'test,product');
+2. SELECT * FROM oc_product_description WHERE product_id = 1001;
+","Product description added with name Test Product and searchable tags test,product.","As Expected",pass,Medium,"Doha Ramadan",Positive,,
+DB_8,"Verify inventory update creates product record with zero stock in oc_product","Admin access",Admin,"Product ID: 1002","1. INSERT INTO oc_product (product_id, model, quantity, stock_status_id, status, date_added) VALUES (1002, 'PROD-002', 0, 5, 1, '2024-01-15 10:00:00');
+2. SELECT * FROM oc_product WHERE product_id = 1002;
+","Inventory record created for the product showing quantity 0 (out of stock).","As Expected",pass,High,"Doha Ramadan",Positive,,
+DB_9,"Verify customer address is stored in oc_address","Customer exists",Customer,"Address ID: 1001","1. INSERT INTO oc_address (address_id, customer_id, firstname, lastname, address_1, city, postcode, country_id, zone_id) VALUES (1001, 1001, 'Doha', 'Ramadan', '123 Test Street', 'Test City', '12345', 1, 1);
+2. SELECT * FROM oc_address WHERE address_id = 1001;
+","Address record stored for the customer at 123 Test Street, Test City.","As Expected",pass,Medium,"Doha Ramadan",Positive,,
+DB_10,"Verify product review is recorded in oc_review","Customer and product exist",Customer,"Review ID: 1001","1. INSERT INTO oc_review (review_id, product_id, customer_id, author, text, rating, status, date_added) VALUES (1001, 1001, 1001, 'Doha Ramadan', 'Great test product!', 5, 1, '2024-01-15 12:00:00');
+2. SELECT * FROM oc_review WHERE review_id = 1001;
+","Product review recorded by the customer with rating 5 and the provided comment.","As Expected",pass,Medium,"Doha Ramadan",Positive,,
+DB_11,"Verify wishlist entry is created in oc_customer_wishlist","Customer and product exist",Customer,"Customer ID: 1001","1. INSERT INTO oc_customer_wishlist (customer_id, product_id, date_added) VALUES (1001, 1001, '2024-01-15 10:45:00');
+2. SELECT * FROM oc_customer_wishlist WHERE customer_id = 1001;
+","Wishlist entry created for the customer containing the specified product.","As Expected",pass,Low,"Ahmed Ghoneim",Positive,,
+DB_12,"Verify order history entry is added to oc_order_history","Order exists",Admin,"Order History ID: 1001","1. INSERT INTO oc_order_history (order_history_id, order_id, order_status_id, comment, date_added) VALUES (1001, 1001, 2, 'Order processing started', '2024-01-15 11:30:00');
+2. SELECT * FROM oc_order_history WHERE order_history_id = 1001;
+","Order history entry added with the provided status and comment indicating processing.","As Expected",pass,High,"Ahmed Ghoneim",Positive,,
+DB_13,"Verify tax rate is created in oc_tax_rate","Admin access",Admin,"Tax Rate ID: 1001","1. INSERT INTO oc_tax_rate (tax_rate_id, name, rate, type, date_added) VALUES (1001, 'Test Tax Rate', 8.00, 'P', '2024-01-15 10:00:00');
+2. SELECT * FROM oc_tax_rate WHERE tax_rate_id = 1001;
+","Tax rate created with name Test Tax Rate and rate 8.00%.","As Expected",pass,Medium,"Ahmed Ghoneim",Positive,,
+DB_14,"Verify length class configuration can be created and retrieved","Admin access",Admin,"Length Class ID: 1001","1. INSERT INTO oc_length_class (length_class_id, value) VALUES (1001, 1.00000000);
+2. SELECT * FROM oc_length_class WHERE length_class_id = 1001;
+","Length class created with value 1.00000000.
+","As Expected",pass,Medium,"Ahmed Ghoneim",Positive,,
+DB_15,"Verify order payment details are recorded in oc_order","Customer exists",Customer,"Order ID: 1002","1. INSERT INTO oc_order (order_id, customer_id, payment_method, total, order_status_id, date_added) VALUES (1002, 1001, 'Credit Card', 150.00, 1, '2024-01-15 12:00:00');
+2. SELECT * FROM oc_order WHERE order_id = 1002;
+","Order payment details recorded with payment method Credit Card and the specified total.","As Expected",pass,High,"Ahmed Ghoneim",Positive,,
+DB_16,"Verify customer group is created in oc_customer_group","Admin access",Admin,"Customer Group ID: 1001","1. INSERT INTO oc_customer_group (customer_group_id, approval, sort_order) VALUES (1001, 0, 2);
+2. SELECT * FROM oc_customer_group WHERE customer_group_id = 1001;
+","Customer group created with the configured approval and sort order.","As Expected",pass,Low,"Nagham Ahmed",Positive,,
+DB_17,"Verify product option is created in oc_product_option","Product exists",Admin,"Product Option ID: 1001","1. INSERT INTO oc_product_option (product_option_id, product_id, option_id, required) VALUES (1001, 1001, 1, 1);
+2. SELECT * FROM oc_product_option WHERE product_option_id = 1001;
+","Product option created for the product with the specified option and requirement flag.","As Expected",pass,Medium,"Nagham Ahmed",Positive,,
+DB_18,"Verify discount coupon is created in oc_coupon","Admin access",Admin,"Coupon ID: 1001","1. INSERT INTO oc_coupon (coupon_id, name, code, type, discount, status, date_added) VALUES (1001, 'Test Coupon', 'TEST10', 'P', 10.00, 1, '2024-01-15 10:00:00');
+2. SELECT * FROM oc_coupon WHERE coupon_id = 1001;
+","Discount coupon created with code TEST10 and discount 10% (percentage type).","As Expected",pass,Medium,"Nagham Ahmed",Positive,,
+DB_19,"Verify manufacturer is created in oc_manufacturer","Admin access",Admin,"Manufacturer ID: 1001","1. INSERT INTO oc_manufacturer (manufacturer_id, name, sort_order) VALUES (1001, 'Test Manufacturer', 1);
+2. SELECT * FROM oc_manufacturer WHERE manufacturer_id = 1001;
+","Manufacturer record created with name Test Manufacturer.","As Expected",pass,Low,"Nagham Ahmed",Positive,,
+DB_20,"Verify store configuration is created in oc_store","Admin access",Admin,"Store ID: 1001","1. INSERT INTO oc_store (store_id, name, url) VALUES (1001, 'Test Store', 'http://teststore.com');
+2. SELECT * FROM oc_store WHERE store_id = 1001;
+","Store configuration created with name Test Store and URL http://teststore.com.","As Expected",pass,Low,"Nagham Ahmed",Positive,,
+DB_21,"Verify that a product discount record is created when valid discount details are inserted","oc_product_discount table exists. product with product_id=1001 exists.",Admin,"product_discount_id=1001, product_id=1001, customer_group_id=1, quantity=10, priority=1, price=79.99, date_start='2024-01-01', date_end='2024-12-31'","1. INSERT INTO oc_product_discount (product_discount_id, product_id, customer_group_id, quantity, priority, price, date_start, date_end) VALUES (1001, 1001, 1, 10, 1, 79.99, '2024-01-01', '2024-12-31');
+2. SELECT * FROM oc_product_discount WHERE product_discount_id = 1001;
+","Discount record with correct quantity, price, and date range is retrieved","As Expected",pass,High,"Nagham Ahmed",Positive,,
+DB_22,"Verify that a product filter record is created when valid product and filter IDs are inserted","oc_product_filter table exists; product with product_id=1001 exists; filter with filter_id=1 exists",Admin,"product_id=1001, filter_id=1","1. INSERT INTO oc_product_filter (product_id, filter_id) VALUES (1001, 1);
+2. SELECT * FROM oc_product_filter WHERE product_id = 1001 AND filter_id = 1;
+","Product filter record is retrieved with correct product and filter IDs","As Expected",pass,High,"Nagham Ahmed",Positive,,
+DB_23,"Verify that an attribute group record is created when valid group details are inserted","oc_attribute_group table exists",Admin,"attribute_group_id=1001, sort_order=1","1. INSERT INTO oc_attribute_group (attribute_group_id, sort_order) VALUES (1001, 1);
+2. SELECT * FROM oc_attribute_group WHERE attribute_group_id = 1001;
+","Attribute group record is retrieved with correct sort order","As Expected",pass,Medium,"Nagham Ahmed",Positive,,
+DB_24,"Verify that a filter group record is created when valid group details are inserted","oc_filter_group table exists",Admin,"filter_group_id=1001, sort_order=1","1. INSERT INTO oc_filter_group (filter_group_id, sort_order) VALUES (1001, 1);
+2. SELECT * FROM oc_filter_group WHERE filter_group_id = 1001;
+","Filter group record is retrieved with correct sort order","As Expected",pass,Medium,"Nagham Ahmed",Positive,,
+DB_25,"Verify that a customer reward record is created when valid reward details are inserted","oc_customer_reward table exists; customer and order exist",Admin,"customer_reward_id=1001, customer_id=1001, order_id=1001, description='Purchase Reward', points=100, date_added='2024-01-15 12:00:00'","1. INSERT INTO oc_customer_reward (customer_reward_id, customer_id, order_id, description, points, date_added) VALUES (1001, 1001, 1001, 'Purchase Reward', 100, '2024-01-15 12:00:00');
+2. SELECT * FROM oc_customer_reward WHERE customer_reward_id = 1001;
+","Reward record is retrieved with correct points and description","As Expected",pass,High,"Nagham Ahmed",Positive,,
+DB_26,"Verify that a customer online record is created when valid session details are inserted","oc_customer_online table exists; customer with customer_id=1001 exists",Admin,"ip='192.168.1.100', customer_id=1001, url='http://teststore.com/product', referer='http://google.com', date_added='2024-01-15 10:00:00'","1. INSERT INTO oc_customer_online (ip, customer_id, url, referer, date_added) VALUES ('192.168.1.100', 1001, 'http://teststore.com/product', 'http://google.com', '2024-01-15 10:00:00');
+2. SELECT * FROM oc_customer_online WHERE customer_id = 1001;
+","Customer online record is retrieved with correct IP, URL, referer, and timestamp","As Expected",pass,Medium,"Kareem Fareed",Positive,,
+DB_27,"Verify that a return record is created when valid return details are inserted","oc_return table exists; order and product exist",Admin,"return_id=1001, order_id=1001, product_id=1001, customer_id=1001, firstname=Doha, lastname=Ramadan, email=doha.ramadan@test.com, telephone=123456789, product='Test Product', model='PROD-001', quantity=1, opened=0, return_reason_id=1, return_status_id=1, date_added='2024-01-15 13:00:00'","1. INSERT INTO oc_return (return_id, order_id, product_id, customer_id, firstname, lastname, email, telephone, product, model, quantity, opened, return_reason_id, return_status_id, date_added) VALUES (1001, 1001, 1001, 1001, 'Doha', 'Ramadan', 'doha.ramadan@test.com', '123456789', 'Test Product', 'PROD-001', 1, 0, 1, 1, '2024-01-15 13:00:00');
+2. SELECT * FROM oc_return WHERE return_id = 1001;
+","Return record is retrieved with correct product and other IDs","As Expected",pass,High,"Kareem Fareed",Positive,,
+DB_28,"Verify that a customer group description record is created when valid group details are inserted","oc_customer_group_description table exists; customer group with customer_group_id=1001 exists",Admin,"customer_group_id=1001, language_id=1, name='Premium Members', description='Premium customer group'","1. INSERT INTO oc_customer_group_description (customer_group_id, language_id, name, description) VALUES (1001, 1, 'Premium Members', 'Premium customer group');
+2. SELECT * FROM oc_customer_group_description WHERE customer_group_id = 1001;
+","Customer group description record is retrieved with correct name and description","As Expected",pass,Medium,"Kareem Fareed",Positive,,
+DB_29,"Verify that a download record is created when valid download details are inserted","oc_download table exists",Admin,"download_id=1001, filename='digital_product.pdf', mask='digital_file_001.pdf', date_added='2024-01-15 10:00:00'","1. INSERT INTO oc_download (download_id, filename, mask, date_added) VALUES (1001, 'digital_product.pdf', 'digital_file_001.pdf', '2024-01-15 10:00:00');
+2. SELECT * FROM oc_download WHERE download_id = 1001;
+","Download record is retrieved with correct filename and mask","As Expected",pass,Medium,"Kareem Fareed",Positive,,
+DB_30,"Verify that a customer affiliate record is created when valid affiliate details are inserted","oc_customer_affiliate table exists; customer with customer_id=1001 exists",Admin,"customer_id=1001, company='Test Company', website='http://test.com', tracking='TRACK1001', commission=5.00, tax='', cheque='Check Payable', paypal='', bank_name='', bank_branch_number='', bank_swift_code='', bank_account_name='', bank_account_number='', custom_field='', status=1, date_added='2024-01-15 10:00:00'","1. INSERT INTO oc_customer_affiliate (customer_id, company, website, tracking, commission, tax, cheque, paypal, bank_name, bank_branch_number, bank_swift_code, bank_account_name, bank_account_number, custom_field, status, date_added) VALUES (1001, 'Test Company', 'http://test.com', 'TRACK1001', 5.00, '', 'Check Payable', '', '', '', '', '', '', '', 1, '2024-01-15 10:00:00');
+2. SELECT * FROM oc_customer_affiliate WHERE customer_id = 1001;
+","Customer affiliate record is retrieved with correct company, website, tracking, and commission details","As Expected",pass,Medium,"Kareem Fareed",Positive,,
+"Negative🔽 DATABASE Test Cases",,,,,,,,,,,,,
+test_ID,"test case description",pre-condition,"roles ","test data",steps/actions,"expected results","actual  results
+",status,priority,"created by",type,,
+DB_31,"Verify that user registration fails when email is missing in oc_customer","oc_customer table exists",Admin,"firstname='Test', lastname='User', email=NULL","1. INSERT INTO oc_customer (customer_id, firstname, lastname, email) VALUES (2001, 'Test', 'User', NULL);","Error due to null email","Pass at DB (record inserted) with email null",Fail,High,"Ahmed Ghoneim",Negative,,
+DB_32,"Verify that product creation fails when price is negative in oc_product","oc_product table exists",Admin,price=-99.99,"1. INSERT INTO oc_product (product_id, model, price, status) VALUES (2001, 'NEG-001', -99.99, 1);","Error or rejection due to invalid price","Record inserted successfully and product inserted with -ve price",Fail,High,"Ahmed Ghoneim",Negative,,
+DB_33,"Verify that order creation fails when customer_id does not exist in oc_order","oc_order table exists",Admin,customer_id=9999,"1. INSERT INTO oc_order (order_id, customer_id, total, date_added) VALUES (2001, 9999, 100.00, NOW());","Error due to invalid foreign key","Record was inserted successfully; no foreign key constraint exists on customer_id",Fail,High,"Ahmed Ghoneim",Negative,,
+DB_34,"Verify that category creation fails when parent_id references non‑existent category in oc_category","oc_category table exists",Admin,parent_id=9999,"1. INSERT INTO oc_category (category_id, parent_id, sort_order, status) VALUES (2001, 9999, 1, 1);","Error due to invalid parent_id","Record was inserted successfully; database allowed non-existent parent_id",Fail,Medium,"Ahmed Ghoneim",Negative,,
+DB_35,"Verify that customer login entry fails when IP is invalid in oc_customer_login","oc_customer_login table exists",Admin,"ip='999.999.999.999'","1. INSERT INTO oc_customer_login (customer_login_id, email, ip, date_added) VALUES (2001, 'test@test.com', '999.999.999.999', NOW());","Error due to invalid IP format","Record was inserted successfully; IP format not validated",Fail,Medium,"Ahmed Ghoneim",Negative,,
+DB_36,"Verify that shopping cart entry fails when quantity is zero in oc_cart","oc_cart table exists",Customer,quantity=0,"1. INSERT INTO oc_cart (cart_id, customer_id, product_id, quantity, date_added) VALUES (2001, 1001, 1001, 0, NOW());","Error due to invalid quantity","Record was inserted successfully; database accepted zero quantity",Fail,Medium,"Kareem Fareed",Negative,,
+DB_37,"Verify that product description fails when text is empty in oc_product_description","oc_product_description table exists",Admin,"name='', description=''","1. INSERT INTO oc_product_description (product_id, language_id, name, description) VALUES (1001, 1, '', '');","Error due to empty name/description","Record was inserted successfully; database does not enforce content validation",Fail,Medium,"Kareem Fareed",Negative,,
+DB_38,"Verify that customer address fails when postcode is missing in oc_address","oc_address table exists",Customer,postcode=NULL,"1. INSERT INTO oc_address (address_id, customer_id, firstname, lastname, postcode) VALUES (2001, 1001, 'Test', 'User', NULL);","Error due to null postcode","Record was inserted successfully; database schema does not enforce NOT NULL on postcode",Fail,Medium,"Kareem Fareed",Negative,,
+DB_39,"Verify that product review fails when rating exceeds maximum in oc_review","oc_review table exists",Customer,rating=10,"1. INSERT INTO oc_review (review_id, product_id, customer_id, author, text, rating, status, date_added) VALUES (2001, 1001, 1001, 'Bad User', 'Invalid rating', 10, 1, NOW());","Error due to invalid rating","Record was inserted successfully; database does not enforce rating range",Fail,High,"Kareem Fareed",Negative,,
+DB_40,"Verify that wishlist entry fails when product_id does not exist in oc_customer_wishlist","oc_customer_wishlist table exists",Customer,product_id=9999,"1. INSERT INTO oc_customer_wishlist (customer_id, product_id, date_added) VALUES (1001, 9999, NOW());","Error due to invalid product_id","Record was inserted successfully; database does not enforce product_id existence",Fail,Medium,"Kareem Fareed",Negative,,
+,,,,,,,,,,,,,

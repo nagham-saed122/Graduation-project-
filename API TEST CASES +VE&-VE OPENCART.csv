@@ -1,0 +1,245 @@
+"test ID","test case description",pre-condition,"roles ","test data",steps/actions,"expected results","actual  results
+",status,priority,"created by","type ",,
+"API 1","Verify retrieving all products list","The API server https://automationexercise.com/api/productsList
+","API tester","URL: /api/productsList
+Method: GET
+","1. Set the Request Method to GET.
+2. Enter the full URL: https://automationexercise.com/api/productsList.
+3. Click Send to submit the request.
+4. Verification: Check that the Status Code is 200 OK.
+5. Ensure the Response Body contains the complete list of products.
+","Status Code 200 & Product list returned","Status 200 OK - List Returned",Pass,High,"Doha Ramadan","API test",,
+"API 2","Verify POST to products list (Check 405)","The API server https://automationexercise.com/api/productsList
+","API tester","URL: /api/productsList
+Method: POST
+Body: Empty
+","1. Set the Request Method to POST.
+2. Enter the full URL: https://automationexercise.com/api/productsList.
+3. Leave the Body empty.
+4. Click Send.
+5. Expected Verification: The Status Code should be 405 Method Not Allowed.
+","Status Code 405 (Method Not Allowed)","Status 200 OK (Bug: API accepted request)",pass,Medium,"Doha Ramadan","API test",,
+"API 3","Verify retrieving all brands list","The API server https://automationexercise.com/api/brandsList
+","API tester","URL: /api/brandsList
+Method: GET
+","1. Set the Request Method to GET.
+2. Enter the full URL: https://automationexercise.com/api/brandsList.
+3. Click Send to submit the request.
+4. Verification: Check that the Status Code is 200 OK.
+5. Ensure the Response Body contains the list of brands.
+","Status Code 200 & Brands list returned","Status Code 200 (API accepted the request incorrectly)",Pass,High,"Doha Ramadan","API test",,
+"API 4","Verify PUT to brands list (Check 405)","The API server https://automationexercise.com/api/brandsList
+","API tester","URL: /api/brandsList
+Method: PUT
+Body: Empty
+","1. Set the Request Method to PUT.
+2. Enter the full URL: https://automationexercise.com/api/brandsList.
+3. Leave the Body empty.
+4. Click Send.
+5. Expected Verification: The Status Code should be 405 Method Not Allowed (or 404 Not Found).
+","Status Code 405 (Method Not Supported)","Status Code 200 - OK",pass,Medium,"Doha Ramadan","API test",,
+"API 5","Verify searching for product","The API server https://automationexercise.com/api/searchProduct
+","API tester","URL: /api/searchProduct
+Method: POST
+Body: search_product: ""top""
+","1. Set the Request Method to POST.
+2. Enter the full URL: https://automationexercise.com/api/searchProduct.
+3. In the Body tab, select form-data and add the key search_product with a value (e.g., top).
+4. Click Send.
+5. Verification: Check that the Status Code is 200 OK and the Response Body contains matching results.
+","Status Code 200 & Results found","Status Code 200 (API accepted the request incorrectly)",Fail,High,"Doha Ramadan","API test",,
+"API 6","Verify search without parameter","The API server https://automationexercise.com/api/searchProduct
+","API tester","URL: /api/searchProduct
+Method: POST
+Body: Missing search_product
+","1. Set the Request Method to POST.
+2. Enter the full URL: https://automationexercise.com/api/searchProduct.
+3. In the Body tab, send the request without any key or value (missing parameter).
+4. Click Send.
+5. Expected Verification: The Status Code should be 400 Bad Request with a clear error message.
+","Status Code 400 (Bad Request)","Status 200 but no results returned as expected",pass,Low,"Doha Ramadan","API test",,
+"API 7","Verify Login with valid details","The API server https://automationexercise.com/api/verifyLogin
+","API tester","URL: /api/verifyLogin
+Method: POST
+Body: email: ""valid@email.com"", password: ""12345""
+","1. Set the Request Method to POST.
+2. Enter the full URL: https://automationexercise.com/api/verifyLogin.
+3. In the Body tab, enter a valid user email and password using form-data.
+4. Click Send.
+5. Verification: Check that the Status Code is 200 OK and the confirmation message is: ""User exists!"".
+","Status Code 200 & ""User exists"" msg","Status Code 200 (Should have failed)",Fail,High,"Doha Ramadan","API test",,
+"API 8","Verify Login without email","The API server  https://automationexercise.com/api/verifyLogin
+","API tester","URL: /api/verifyLogin
+Method: POST
+Body: password: ""12345"" (No Email)
+",". Set the Request Method to POST.
+2. Enter the full URL: https://automationexercise.com/api/verifyLogin.
+3. In the Body tab, enter the password only, omitting the email.
+4. Click Send.
+5. Expected Verification: The Status Code should be 400 Bad Request due to missing email data.
+","Status Code 400 (Bad Request)","Status 200 but message mismatch",pass,Medium,"Doha Ramadan","API test",,
+"API 9","Verify DELETE method on Login","The API server https://automationexercise.com/api/verifyLogin
+","API tester","URL: /api/verifyLogin
+Method: DELETE
+Method: POST
+Body: email: ""wrong@email.com"", password: ""wrong""
+","1. Set the Request Method to DELETE.
+2. Enter the full URL: https://automationexercise.com/api/verifyLogin.
+3. Click Send.
+4. Expected Verification: The Status Code should be 405 Method Not Allowed or 404 Not Found.
+","Status Code 405 (Method Not Allowed)","Status Code 200 (Should have failed)",pass,Low,"Doha Ramadan","API test",,
+"API 10","Verify Login with invalid details","The API server https://automationexercise.com/api/verifyLogin
+","API tester","URL: /api/verifyLogin
+Method: POST
+Body: email: ""wrong@email.com"", password: ""wrong""
+","1. Set the Request Method to POST.
+2. Enter the full URL: https://automationexercise.com/api/verifyLogin.
+3. In the Body tab, enter invalid credentials (email and password).
+4. Click Send.
+5. Expected Verification: The Status Code should be 404 Not Found or 401 Unauthorized with a ""User not found"" message.
+","Status Code 404 (Not Found)","Status Code 200 (API accepted the request)",pass,High,"Doha Ramadan","API test",,
+"API 11","Verify Create User Account","The API server  https://automationexercise.com/api/createAccount
+","API tester","URL: /api/createAccount
+Method: POST
+Body: Full User Profile (Name, Email, Pass...)
+","1. Set the Request Method to POST.
+2. Enter the full URL: https://automationexercise.com/api/createAccount.
+3. In the Body tab, enter all required user details (Name, Email, Password, Address, etc.) using form-data.
+4. Crucial: Ensure a unique, unused email is used.
+5. Click Send.
+6. Verification: Check that the Status Code is 201 Created and the confirmation message is: ""Account created!"".
+","Status Code 201 (Created)","Status Code 200 (Should have been 404)",Fail,High,"Doha Ramadan","API test",,
+"API 12","Verify Delete Account","The API server   https://automationexercise.com/api/deleteAccount
+","API tester","URL: /api/deleteAccount
+Method: DELETE
+Body: email, password
+","1. Set the Request Method to DELETE.
+2. Enter the full URL: https://automationexercise.com/api/deleteAccount.
+3. In the Body tab, enter the account's email and password using form-data.
+4. Click Send.
+5. Verification: Check that the Status Code is 200 OK and the confirmation message is: ""Account deleted!""
+","Status Code 200 & ""Deleted"" msg","Status Code 200 (Expected 201)",Fail,High,"Doha Ramadan","API test",,
+"API 13","Verify Update Account details","The API server https://automationexercise.com/api/updateAccount
+","API tester","URL: /api/updateAccount
+Method: PUT
+Body: Updated fields (e.g., Name)
+","1. Set the Request Method to PUT.
+2. Enter the full URL: https://automationexercise.com/api/updateAccount.
+3. In the Body tab, enter the fields to be updated (along with required credentials) using form-data.
+4. Click Send.
+5. Verification: Check that the Status Code is 200 OK and the confirmation message is: ""User updated!"".
+","Status Code 200 & ""Updated"" msg","Status 200 but message mismatch",Fail,Medium,"Doha Ramadan","API test",,
+"API 14","Verify Get User Details by Email","The API server https://automationexercise.com/api/getUserDetailByEmail
+","API tester","URL: /api/getUserDetailByEmail
+Method: GET
+Params: ?email=test@email.com
+
+","1. Set the Request Method to GET.
+2. Enter the full URL: https://automationexercise.com/api/getUserDetailByEmail.
+3. In the Params tab, add key: email and value: test@example.com (for an existing user).
+4. Click Send.
+5. Verification: Check that the Status Code is 200 OK and the Response Body contains the requested user details.
+","Status Code 200 & Details returned","Status 200 but Details check failed",Fail,High,"Doha Ramadan","API test",,
+Negative🔽,"API Test Cases",,,,,,,,,,,,
+"test ID","test case description",pre-condition,"roles ","test data",steps/actions,"expected results","actual  results
+",status,perioty,"created by","type ",,
+"API 1_N","Verify retrieving all products list with invalid endpoint","API server https://automationexercise.com/api/productsList","API tester","URL: /api/productsListX; Method: GET","1. Set Request Method to GET
+2. Enter URL https://automationexercise.com/api/productsListX
+3. Click Send
+4. Verify Status Code is 404 Not Found
+","Status Code 404 (Not Found)","As expected",Pass,Low,"Ahmed Ghoneim","API test",,
+"API 2_N","Verify POST to products list with invalid body data","API server https://automationexercise.com/api/productsList","API tester","URL: /api/productsList; Method: POST; Body: Invalid JSON data","1. Set Request Method to POST
+2. Enter URL https://automationexercise.com/api/productsList
+3. In Body tab send invalid JSON data
+4. Click Send
+5. Verify Status Code is 400 Bad Request or 405 This request method is not supported.
+","Status Code 405 This request method is not supported.","As expected",Pass,Medium,"Ahmed Ghoneim","API test",,
+"API 3_N","Verify retrieving all brands list with invalid endpoint","API server https://automationexercise.com/api/brandsList","API tester","URL: /api/brandsListY; Method: GET","1. Set Request Method to GET
+2. Enter URL https://automationexercise.com/api/brandsListY
+3. Click Send
+4. Verify Status Code is 404 Not Found
+","Status Code 404 (Not Found)","As expected",Pass,Low,"Ahmed Ghoneim","API test",,
+"API 4_N","Verify PUT to brands list with invalid body data","API server https://automationexercise.com/api/brandsList","API tester","URL: /api/brandsList; Method: PUT; Body: Invalid JSON data","1. Set Request Method to PUT
+2. Enter URL https://automationexercise.com/api/brandsList
+3. In Body tab send invalid JSON data
+4. Click Send
+5. Verify Status Code is 400 Bad Request or 405 This request method is not supported.
+","Status Code 405 This request method is not supported.","As expected",Pass,Medium,"Ahmed Ghoneim","API test",,
+"API 5_N","Verify searching for invalid product","API server https://automationexercise.com/api/searchProduct","API tester","URL: /api/searchProduct; Method: POST; Body: search_product: ""!@#$%InvalidItem""","1. Set Request Method to POST
+2. Enter URL https://automationexercise.com/api/searchProduct
+3. In Body tab select form-data and add key search_product with value !@#$%InvalidItem
+4. Click Send
+5. Verify Status Code 200 and response contains no results
+","Status Code 200 & No results found","As expected",Pass,Medium,"Ahmed Ghoneim","API test",,
+"API 6_N","Verify search with empty parameter value","API server https://automationexercise.com/api/searchProduct","API tester","URL: /api/searchProduct; Method: POST; Body: search_product: """"","1. Set Request Method to POST
+2. Enter URL https://automationexercise.com/api/searchProduct
+3. In Body tab add key search_product with empty value
+4. Click Send
+5. Verify Status Code 400 Bad Request with clear error message
+","Status Code 400 (Bad Request)","As expected",pass,Low,"Nagham Ahmed","API test",,
+"API 7_N","Verify Login with invalid password","API server https://automationexercise.com/api/verifyLogin","API tester","URL: /api/verifyLogin; Method: POST; Body: email: valid@email.com; password: wrongpass","1. Set Request Method to POST
+2. Enter URL https://automationexercise.com/api/verifyLogin
+3. In Body tab enter valid email and wrong password using form-data
+4. Click Send
+5. Verify Status Code 404 Not Found with ""User not found!"" message
+","Status Code 404 & ""User not found"" msg","As expected",Pass,High,"Nagham Ahmed","API test",,
+"API 8_N","Verify Login without password parameter","API server https://automationexercise.com/api/verifyLogin","API tester","URL: /api/verifyLogin; Method: POST; Body: email: test@email.com (No Password)","1. Set Request Method to POST
+2. Enter URL https://automationexercise.com/api/verifyLogin
+3. In Body tab enter email only and omit password
+4. Click Send
+5. Verify Status Code 400 Bad Request due to missing password
+","Status Code 400 (Bad Request)","Status Code 200 (User not found!)",FAIL,Medium,"Nagham Ahmed","API test",,
+"API 9_N","Verify DELETE method on Login with invalid body","API server https://automationexercise.com/api/verifyLogin","API tester","URL: /api/verifyLogin; Method: DELETE; Body: Invalid JSON data","1. Set Request Method to DELETE
+2. Enter URL https://automationexercise.com/api/verifyLogin
+3. In Body tab send invalid JSON data
+4. Click Send
+5. Verify Status Code 400 Bad Request or 415 Unsupported Media Type
+","Status Code 400 (Bad Request)","As expected",Pass,Low,"Nagham Ahmed","API test",,
+"API 10_N","Verify Login with invalid email format","API server https://automationexercise.com/api/verifyLogin","API tester","URL: /api/verifyLogin; Method: POST; Body: email: invalid-email; password: 12345","1. Set Request Method to POST
+2. Enter URL https://automationexercise.com/api/verifyLogin
+3. In Body tab enter invalid email format and valid password using form-data
+4. Click Send
+5. Verify Status Code 400 Bad Request with clear error message for invalid email
+","Status Code 400 (Bad Request)","status code 200 (parameter is missing in POST request)",FAIL,Medium,"Nagham Ahmed","API test",,
+"API 11_N","Verify Create User Account with existing email","API server https://automationexercise.com/api/createAccount","API tester","URL: /api/createAccount; Method: POST; Body: Full User Profile with already registered Email","1. Set Request Method to POST
+2. Enter URL https://automationexercise.com/api/createAccount
+3. In Body tab enter full user details using an already registered email
+4. Click Send
+5. Verify Status Code 400 Bad Request and response indicates email already exists
+","Status Code 400 (Bad Request)","As expected",Pass,High,"Kareem Fareed
+","API test",,
+"API 11_N2","Verify Create User Account without password","API server https://automationexercise.com/api/createAccount","API tester","URL: /api/createAccount; Method: POST; Body: User Profile with Missing Password","1. Set Request Method to POST
+2. Enter URL https://automationexercise.com/api/createAccount
+3. In Body tab enter required user details except password
+4. Click Send
+5. Verify Status Code 400 Bad Request with clear error message for missing password
+","Status Code 400 (Bad Request)","As expected",Pass,High,"Kareem Fareed
+","API test",,
+"API 12_N","Verify Delete Account with invalid password","API server https://automationexercise.com/api/deleteAccount","API tester","URL: /api/deleteAccount; Method: DELETE; Body: email: valid@email.com; password: wrongpass","1. Set Request Method to DELETE
+2. Enter URL https://automationexercise.com/api/deleteAccount
+3. In Body tab enter valid email and wrong password using form-data
+4. Click Send
+5. Verify Status Code 404 Not Found with ""User not found!"" message
+","Status Code 404 & ""User not found"" msg","As expected",Pass,High,"Kareem Fareed
+","API test",,
+"API 13_N","Verify Update Account details with invalid email","API server https://automationexercise.com/api/updateAccount","API tester","URL: /api/updateAccount; Method: PUT; Body: Updated fields with non-existent user email","1. Set Request Method to PUT
+2. Enter URL https://automationexercise.com/api/updateAccount
+3. In Body tab enter update fields with non-existent user email using form-data
+4. Click Send
+5. Verify Status Code 404 Not Found with ""User not found!"" message
+","Status Code 404 & ""User not found"" msg","As expected",Pass,Medium,"Kareem Fareed
+","API test",,
+"API 14_N","Verify Get User Details by non-existent Email","API server https://automationexercise.com/api/getUserDetailByEmail","API tester","URL: /api/getUserDetailByEmail; Method: GET; Params: ?email=nonuser@fake.com","1. Set Request Method to GET
+2. Enter URL https://automationexercise.com/api/getUserDetailByEmail
+3. In Params add email=nonuser@fake.com
+4. Click Send
+5. Verify Status Code 404 Not Found with ""User not found!"" message
+","Status Code 404 & ""User not found"" msg","As expected",Pass,Medium,"Kareem Fareed
+","API test",,
+"API 14_N2","Verify Get User Details without email parameter","API server https://automationexercise.com/api/getUserDetailByEmail","API tester","URL: /api/getUserDetailByEmail; Method: GET; Params: (None)","1. Set Request Method to GET
+2. Enter URL https://automationexercise.com/api/getUserDetailByEmail
+3. Do not add any params
+4. Click Send
+5. Verify Status Code 400 Bad Request with clear error message for missing email parameter
+","Status Code 400 (Bad Request)","As expected",Pass,Medium,"Kareem Fareed
+","API test",,

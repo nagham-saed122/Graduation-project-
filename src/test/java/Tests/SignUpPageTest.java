@@ -43,7 +43,7 @@ public class SignUpPageTest extends BaseTestClass {
             signUpPage.setUsername("SomeUser");
             signUpPage.setPassword("SomePassword!");
 
-            // Click Close button
+            // Click the Close button
             signUpPage.clickOnCloseButton();
 
         }

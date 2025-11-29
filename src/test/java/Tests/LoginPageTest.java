@@ -36,6 +36,8 @@ public class LoginPageTest extends BaseTestClass {
         Assert.assertTrue(loginPage.isLoginModalOpened(),
                 "Login modal did NOT open!");
 
+        Thread.sleep(2000);
+
         loginPage.setLoginUsername("SomeUser");
         loginPage.setLoginPassword("SomePassword!");
 

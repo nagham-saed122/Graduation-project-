@@ -1,0 +1,5 @@
+Label,# Samples,Average,Min,Max,Std. Dev.,Error %,Throughput,Received KB/sec,Sent KB/sec,Avg. Bytes
+API 1: Get All Products,100,1120,462,2068,428.25,0.000%,1.32326,8.31,0.18,6430.7
+API 7: Verify Login,100,649,263,1396,332.23,0.000%,1.34165,1.22,0.87,927.8
+API: Search Product,100,591,1,1484,332.78,3.000%,1.34371,2.47,0.62,1885.6
+TOTAL,300,786,1,2068,436.93,1.000%,3.88616,11.69,1.61,3081.4

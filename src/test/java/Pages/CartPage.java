@@ -39,7 +39,6 @@ public class CartPage {
     By successMessageTextLocator = By.xpath("//h2[text()='Thank you for your purchase!']");
     By successOKButtonLocator = By.xpath("//button[contains(@class, 'confirm') and text()='OK']");
 
-
     // --- Table Interaction Methods ---
 
     public List<String> getProductTitles() {
@@ -60,6 +59,10 @@ public class CartPage {
             prices.add(row.findElement(By.xpath("./td[3]")).getText());
         }
         return prices;
+    }
+
+    public void waitForProductInCart(String productName) {
+        wait.until(ExpectedConditions.textToBePresentInElementLocated(By.id("tbodyid"), productName));
     }
 
     public void deleteProduct(String productName) {

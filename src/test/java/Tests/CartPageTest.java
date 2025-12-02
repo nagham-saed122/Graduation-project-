@@ -43,11 +43,13 @@ public class CartPageTest extends BaseTestClass {
         addProductToCart("Nokia lumia 1520");
         cartPage = homePage.clickCartButton();
         String productToDelete = "Nokia lumia 1520";
+        cartPage.waitForProductInCart(productToDelete);
         List<String> initialProducts = cartPage.getProductTitles();
         Assert.assertTrue(initialProducts.contains(productToDelete), "Product to delete should be present initially");
         cartPage.deleteProduct(productToDelete);
         List<String> updatedProducts = cartPage.getProductTitles();
-        Assert.assertFalse(updatedProducts.contains(productToDelete), "Product should be removed from cart after deletion");
+        Assert.assertFalse(updatedProducts.contains(productToDelete),
+                "Product should be removed from cart after deletion");
     }
 
     @Test(priority = 3)
@@ -75,7 +77,8 @@ public class CartPageTest extends BaseTestClass {
         cartPage.clickPlaceOrderButton();
         cartPage.clickPurchaseButton();
         String alertText = cartPage.getAlertMessage();
-        Assert.assertTrue(alertText.contains("Please fill out Name and Creditcard"), "Alert should warn about missing data");
+        Assert.assertTrue(alertText.contains("Please fill out Name and Creditcard"),
+                "Alert should warn about missing data");
         cartPage.acceptAlert();
     }
 }

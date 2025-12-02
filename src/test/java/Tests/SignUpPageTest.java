@@ -17,7 +17,7 @@ public class SignUpPageTest extends BaseTestClass {
                     "Sign Up modal did NOT open!");
 
             // Fill username & password
-            signUpPage.setUsername("NaghommmAhmedSaed");
+            signUpPage.setUsername("NaghommAhmedSaed");
             signUpPage.setPassword("MySecretPassword!");
             Thread.sleep(2000);
             signUpPage.clickSignUpButton();

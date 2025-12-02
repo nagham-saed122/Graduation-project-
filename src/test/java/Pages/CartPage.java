@@ -34,7 +34,7 @@ public class CartPage {
     By yearTextboxLocator = By.id("year");
     By purchaseButtonLocator = By.xpath("//button[@onclick=\"purchaseOrder()\"]");
     By closeButtonLocator = By.className("btn-secondary");
-
+//
     // Locators for Success Message (SweetAlert)
     By successMessageTextLocator = By.xpath("//h2[text()='Thank you for your purchase!']");
     By successOKButtonLocator = By.xpath("//button[contains(@class, 'confirm') and text()='OK']");

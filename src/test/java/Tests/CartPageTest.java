@@ -11,7 +11,7 @@ import java.time.Duration;
 import java.util.List;
 
 public class CartPageTest extends BaseTestClass {
-
+//
     // Helper method to ensure a product is in the cart
     private void addProductToCart(String productName) {
         homePage.clickHomeButton();

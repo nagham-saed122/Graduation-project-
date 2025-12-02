@@ -24,7 +24,7 @@ public class SignUpPage {
     WebDriverWait wait;
 
 
-
+//
     public boolean isSignUpModalOpened() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(signInModalLocator));
         return driver.findElement(signInModalLocator).isDisplayed();

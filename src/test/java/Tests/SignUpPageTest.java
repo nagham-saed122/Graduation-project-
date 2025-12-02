@@ -28,7 +28,7 @@ public class SignUpPageTest extends BaseTestClass {
             Assert.assertEquals(alertMsg, "Sign up successful.");
         }
 
-
+//
         @Test(priority = 2)
         public void verifyCancelSignUp() {
 

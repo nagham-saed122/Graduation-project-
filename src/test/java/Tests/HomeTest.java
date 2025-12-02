@@ -20,7 +20,7 @@ public class HomeTest extends BaseTestClass {
         Assert.assertTrue(home.isLoginDisplayed(), "Login link should be displayed");
         Assert.assertTrue(home.isSignUpDisplayed(), "Sign Up link should be displayed");
     }
-
+//
     @Test
     public void verifyAllProductsDisplayed() {
         home = homePage.clickHomeButton();

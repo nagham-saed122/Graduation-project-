@@ -25,7 +25,7 @@ public class LoginPage {
     WebDriverWait wait;
 
 
-
+//
     public boolean isLoginModalOpened() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(loginInModalLocator));
         return driver.findElement(loginInModalLocator).isDisplayed();

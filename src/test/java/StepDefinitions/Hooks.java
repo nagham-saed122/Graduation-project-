@@ -8,7 +8,7 @@ import java.time.Duration;
 
 public class Hooks {
     public static WebDriver driver;
-
+//
     @Before
     public void setUp() {
         driver = new FirefoxDriver();

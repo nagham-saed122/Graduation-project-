@@ -46,7 +46,7 @@ public class Home {
     By footer = By.id("footc");
 
     // --- Navbar Methods ---
-//
+
     public boolean isLogoDisplayed() {
         return wait.until(ExpectedConditions.visibilityOfElementLocated(logo)).isDisplayed();
     }

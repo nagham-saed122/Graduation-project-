@@ -9,7 +9,7 @@ public class LoginPageTest extends BaseTestClass {
     public void verifyLogin() throws InterruptedException {
 
         loginPage = homePage.clickLoginButton();
-//
+
         Assert.assertTrue(loginPage.isLoginModalOpened(),
                 "Login modal did NOT open!");
 

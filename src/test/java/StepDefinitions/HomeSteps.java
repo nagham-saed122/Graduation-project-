@@ -25,7 +25,7 @@ public class HomeSteps {
         driver.get("https://demoblaze.com/");
         home = homePage.clickHomeButton();
     }
-//
+
     @Then("the Logo should be displayed")
     public void the_logo_should_be_displayed() {
         Assert.assertTrue(home.isLogoDisplayed(), "Logo should be displayed");

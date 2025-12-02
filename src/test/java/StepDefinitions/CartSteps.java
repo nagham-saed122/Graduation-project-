@@ -92,7 +92,7 @@ public class CartSteps {
         cartPage.setYear(data.get("Year"));
         cartPage.clickPurchaseButton();
     }
-    //
+
 
     @Then("I should see the success message {string}")
     public void i_should_see_the_success_message(String expectedMessage) {

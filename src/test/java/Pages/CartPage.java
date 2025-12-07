@@ -2,6 +2,7 @@ package Pages;
 
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -42,7 +43,11 @@ public class CartPage {
     // --- Table Interaction Methods ---
 
     public List<String> getProductTitles() {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(cartRowsLocator));
+        try {
+            wait.until(ExpectedConditions.visibilityOfElementLocated(cartRowsLocator));
+        } catch (TimeoutException e) {
+            return new ArrayList<>();
+        }
         List<String> titles = new ArrayList<>();
         List<WebElement> rows = driver.findElements(cartRowsLocator);
         for (WebElement row : rows) {
@@ -52,7 +57,11 @@ public class CartPage {
     }
 
     public List<String> getProductPrices() {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(cartRowsLocator));
+        try {
+            wait.until(ExpectedConditions.visibilityOfElementLocated(cartRowsLocator));
+        } catch (TimeoutException e) {
+            return new ArrayList<>();
+        }
         List<String> prices = new ArrayList<>();
         List<WebElement> rows = driver.findElements(cartRowsLocator);
         for (WebElement row : rows) {

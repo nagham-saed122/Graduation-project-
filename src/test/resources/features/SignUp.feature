@@ -6,7 +6,7 @@ Feature: Sign Up Functionality
   Scenario: Successful Sign Up
     When I click the Sign Up button
     Then the Sign Up modal should open
-    When I sign up with username "NaghommmAhmedSaed" and password "MySecretPassword!"
+    When I sign up with username "NaghommmmmAhmedSaed" and password "MySecretPassword!"
     And I click the Sign Up submit button
     Then I should see a sign up alert saying "Sign up successful."
 
